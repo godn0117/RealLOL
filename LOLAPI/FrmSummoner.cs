@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.IO;
@@ -38,7 +39,7 @@ namespace LOLAPI
         private List<MatchInf> lstMatInf = new List<MatchInf>();
         private List<TimeStamp> lstTime = new List<TimeStamp>();
         private DataTable resultTab;
-        string apiKey = "RGAPI-8de1f423-1520-47e7-b52a-33c66f07dd2c";
+        string apiKey = ConfigurationManager.ConnectionStrings["lolApiKey"].ConnectionString;
 
 
         public FrmSummoner()
@@ -48,7 +49,7 @@ namespace LOLAPI
         public FrmSummoner(string summonerName) : this()
         {
             this.label1.Text = summonerName + " 님의 전적";
-            searchName = summonerName;
+            searchName = summonerName.ToLower().Replace(" ","");
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -98,14 +99,14 @@ namespace LOLAPI
             resultTab.Columns.Add("피해량");
 
 
-
+            DataRow row;
 
             for (int i = 0; i < lstPlayer.Count; i++)
             {
                 playTimeIndex = i / 10;
-                if (lstPlayer[i].SummonerName == searchName)
+                if (lstPlayer[i].AccountId == lstV4[0].AccountId)
                 {
-                    DataRow row = resultTab.NewRow();
+                    row = resultTab.NewRow();
                     if (lstPlayer[i].Win == true)
                     {
                         row["승/패"] = "승";
@@ -114,7 +115,6 @@ namespace LOLAPI
                     {
                         row["승/패"] = "패";
                     }
-                    row["타입"] = lstMatches[i].Queue;
                     row["챔피언"] = lstPlayer[i].ChampionId;
                     row["K / D / A"] = lstPlayer[i].Kills + " / " + lstPlayer[i].Deaths + " / " + lstPlayer[i].Assists;
                     row["스펠"] = lstPlayer[i].Spell1Id + " / " + lstPlayer[i].Spell2Id;
@@ -126,6 +126,39 @@ namespace LOLAPI
                     resultTab.Rows.Add(row);
 
                     //dataGridView1.Rows.Add(row);
+                }
+            }
+
+            for (int i = 0; i < 10; i++)
+            {
+                //resultTab.Rows[i]["타입"] = lstMatches[i].Queue;
+                if (lstMatches[i].Queue == 430)
+                {
+                    resultTab.Rows[i]["타입"] = "일반";
+                }
+                else if (lstMatches[i].Queue == 450)
+                {
+                    resultTab.Rows[i]["타입"] = "칼바람 나락";
+                }
+                else if (lstMatches[i].Queue == 440)
+                {
+                    resultTab.Rows[i]["타입"] = "자유 랭크";
+                }
+                else if (lstMatches[i].Queue == 1200)
+                {
+                    resultTab.Rows[i]["타입"] = "돌격 넥서스";
+                }
+                else if (lstMatches[i].Queue == 420)
+                {
+                    resultTab.Rows[i]["타입"] = "솔로 랭크";
+                }
+                else if (lstMatches[i].Queue == 840 || lstMatches[i].Queue == 850)
+                {
+                    resultTab.Rows[i]["타입"] = "봇 전";
+                }
+                else
+                {
+                    resultTab.Rows[i]["타입"] = "특별 게임";
                 }
             }
             try
