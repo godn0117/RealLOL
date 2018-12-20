@@ -1,0 +1,265 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{388F9E7C-7564-40C0-8341-8C7E7341A668}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>LOLAPI</RootNamespace>
+    <AssemblyName>LOLAPI</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>LOLAPI.Program</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Bans.cs" />
+    <Compile Include="ApiImage.cs" />
+    <Compile Include="Champion.cs" />
+    <Compile Include="ChampionDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChampionDetail.Designer.cs">
+      <DependentUpon>ChampionDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChampionInfo.cs" />
+    <Compile Include="ControlChampion.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ControlChampion.Designer.cs">
+      <DependentUpon>ControlChampion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="controlMatchDetail.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="controlMatchDetail.Designer.cs">
+      <DependentUpon>controlMatchDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="controlMatchInfo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="controlMatchInfo.Designer.cs">
+      <DependentUpon>controlMatchInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DB\DBConnection.cs" />
+    <Compile Include="DB\ItemDB.cs" />
+    <Compile Include="DB\RuneDB.cs" />
+    <Compile Include="DB\SpellDB.cs" />
+    <Compile Include="DB\VersionDB.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmSummoner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSummoner.Designer.cs">
+      <DependentUpon>FrmSummoner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Item\controlItems.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Item\controlItems.Designer.cs">
+      <DependentUpon>controlItems.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Item\DetailItem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Item\DetailItem.Designer.cs">
+      <DependentUpon>DetailItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Item\LOLItem.cs" />
+    <Compile Include="JSON\JsonWork.cs" />
+    <Compile Include="MainControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="MainControl.Designer.cs">
+      <DependentUpon>MainControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Matches.cs" />
+    <Compile Include="MatchInf.cs" />
+    <Compile Include="Player.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rune\controlRune.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Rune\controlRune.Designer.cs">
+      <DependentUpon>controlRune.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Rune\InnerRune.cs" />
+    <Compile Include="Rune\Rune.cs" />
+    <Compile Include="Spells.cs" />
+    <Compile Include="Spell\controlSpell.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Spell\controlSpell.Designer.cs">
+      <DependentUpon>controlSpell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Spell\Spell.cs" />
+    <Compile Include="Summoner.cs" />
+    <Compile Include="SummonerRank.cs" />
+    <Compile Include="SummonerV3.cs" />
+    <Compile Include="TimeStamp.cs" />
+    <Compile Include="Passive.cs" />
+    <Compile Include="Skin.cs" />
+    <Compile Include="Tags.cs" />
+    <Compile Include="Version\Version.cs" />
+    <EmbeddedResource Include="ChampionDetail.resx">
+      <DependentUpon>ChampionDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ControlChampion.resx">
+      <DependentUpon>ControlChampion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="controlMatchDetail.resx">
+      <DependentUpon>controlMatchDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="controlMatchInfo.resx">
+      <DependentUpon>controlMatchInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSummoner.resx">
+      <DependentUpon>FrmSummoner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Item\controlItems.resx">
+      <DependentUpon>controlItems.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Item\DetailItem.resx">
+      <DependentUpon>DetailItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainControl.resx">
+      <DependentUpon>MainControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Rune\controlRune.resx">
+      <DependentUpon>controlRune.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Spell\controlSpell.resx">
+      <DependentUpon>controlSpell.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="App.config" />
+    <None Include="JSON\Champions.json" />
+    <None Include="JSON\items.json" />
+    <None Include="JSON\Runes.json" />
+    <None Include="JSON\Spells.json" />
+    <None Include="JSON\Version.json" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Champion.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Champion_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>Champion.mdf</DependentUpon>
+    </Content>
+    <Content Include="LOLData.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="LOLData_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>LOLData.mdf</DependentUpon>
+    </Content>
+    <Content Include="Resources\111.PNG" />
+    <Content Include="Resources\2.PNG" />
+    <Content Include="Resources\KakaoTalk_20181211_202916226.jpg" />
+    <Content Include="Resources\MainLogo.PNG" />
+    <Content Include="Resources\결의.jpg" />
+    <Content Include="Resources\돋보기.png" />
+    <Content Include="Resources\마법.jpg" />
+    <Content Include="Resources\영감.jpg" />
+    <Content Include="Resources\정밀.jpg" />
+    <Content Include="Resources\지배.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.1%28x86 및 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
