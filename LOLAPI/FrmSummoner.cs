@@ -40,7 +40,7 @@ namespace LOLAPI
         private List<TimeStamp> lstTime = new List<TimeStamp>();
         private DataTable resultTab;
         string apiKey = ConfigurationManager.ConnectionStrings["lolApiKey"].ConnectionString;
-
+        List<Champion> champions = ControlChampion.champions;
 
         public FrmSummoner()
         {
@@ -73,6 +73,7 @@ namespace LOLAPI
 
         private void FrmSummoner_Load(object sender, EventArgs e)
         {
+            dataGridView1.RowHeadersVisible = false;
             ParsingSummonerCode();
             if (!ParsingSummonerRank())
             {
@@ -105,7 +106,7 @@ namespace LOLAPI
             resultTab.Columns.Add("플레이");
             resultTab.Columns.Add("승/패");
             resultTab.Columns.Add("타입");
-            resultTab.Columns.Add("챔피언");
+            resultTab.Columns.Add("챔피언", typeof(Image));
             resultTab.Columns.Add("K / D / A");
             resultTab.Columns.Add("스펠");
             resultTab.Columns.Add("아이템", typeof(ListView));
@@ -115,7 +116,7 @@ namespace LOLAPI
 
 
             DataRow row;
-
+            Image chamImage = null;
             for (int i = 0; i < lstPlayer.Count; i++)
             {
                 playTimeIndex = i / 10;
@@ -130,7 +131,16 @@ namespace LOLAPI
                     {
                         row["승/패"] = "패";
                     }
-                    row["챔피언"] = lstPlayer[i].ChampionId;
+                    // lstPlayer[i].ChampionId
+                    foreach (var item in champions)
+                    {
+                        if (item.Key == lstPlayer[i].ChampionId)
+                        {
+                            chamImage = item.ChamImage;
+                            break;
+                        }
+                    }
+                    row["챔피언"] = chamImage;//lstPlayer[i].ChampionId;
                     row["K / D / A"] = lstPlayer[i].Kills + " / " + lstPlayer[i].Deaths + " / " + lstPlayer[i].Assists;
                     row["스펠"] = lstPlayer[i].Spell1Id + " / " + lstPlayer[i].Spell2Id;
 
@@ -148,8 +158,10 @@ namespace LOLAPI
                     itemImageList.Images.Add(lstPlayer[i].Item3.ToString(), ReturnItemImage(lstPlayer[i].Item3));
                     itemImageList.Images.Add(lstPlayer[i].Item4.ToString(), ReturnItemImage(lstPlayer[i].Item4));
                     itemImageList.Images.Add(lstPlayer[i].Item5.ToString(), ReturnItemImage(lstPlayer[i].Item5));
+                    itemImageList.Images.Add(lstPlayer[i].Item6.ToString(), ReturnItemImage(lstPlayer[i].Item6));
 
-                    
+
+
                     ListView listView = new ListView();
                     listView.View = View.LargeIcon;
                     listView.LargeImageList = itemImageList;
@@ -185,12 +197,19 @@ namespace LOLAPI
                     lItem5.Text = lstPlayer[i].Item5.ToString();
                     lItem5.ImageKey = lstPlayer[i].Item5.ToString();
 
+                    ListViewItem lItem6 = new ListViewItem();
+                    lItem6.Name = lstPlayer[i].Item6.ToString();
+                    lItem6.Text = lstPlayer[i].Item6.ToString();
+                    lItem6.ImageKey = lstPlayer[i].Item6.ToString();
+
                     listView.Items.Add(lItem0);
                     listView.Items.Add(lItem1);
                     listView.Items.Add(lItem2);
                     listView.Items.Add(lItem3);
                     listView.Items.Add(lItem4);
                     listView.Items.Add(lItem5);
+                    listView.Items.Add(lItem6);
+
 
                     row["아이템"] = listView;// ReturnItemImage(lstPlayer[i].Item1) ReturnItemImage(lstPlayer[i].Item2) ReturnItemImage(lstPlayer[i].Item3)  ReturnItemImage(lstPlayer[i].Item4) ReturnItemImage(lstPlayer[i].Item5)  ReturnItemImage(lstPlayer[i].Item6);
 
@@ -264,28 +283,28 @@ namespace LOLAPI
                 MessageBox.Show("공백 및 대소문자를 구별해주세요");
                 return;
             }
-            //for (int i = 0; i <= playTimeIndex; i++)
-            //{
-            //    for (int j = 0; j < resultTab.Columns.Count; j++)
-            //    {
-            //        if (dataGridView1.Rows[i].Cells[1].Value.ToString() == "승")
-            //        {
-            //            this.dataGridView1.Rows[i].Cells[j].Style.BackColor = Color.SkyBlue;
-            //            this.dataGridView1.Rows[i].Cells[1].Style.Font = new Font("Verdana", 13, FontStyle.Bold);
-            //            this.dataGridView1.Rows[i].Cells[3].Style.Font = new Font("Verdana", 9, FontStyle.Bold);
-            //        }
-            //        else if (dataGridView1.Rows[i].Cells[1].Value.ToString() == "패")
-            //        {
-            //            this.dataGridView1.Rows[i].Cells[j].Style.BackColor = Color.Pink;
-            //            this.dataGridView1.Rows[i].Cells[1].Style.Font = new Font("Verdana", 13, FontStyle.Bold);
-            //            this.dataGridView1.Rows[i].Cells[3].Style.Font = new Font("Verdana", 9, FontStyle.Bold);
-            //        }
-            //        else
-            //        {
-            //            this.dataGridView1.Rows[i].Cells[j].Style.BackColor = Color.SlateGray;
-            //        }
-            //    }
-            //}
+            for (int i = 0; i <= playTimeIndex; i++)
+            {
+                for (int j = 0; j < resultTab.Columns.Count; j++)
+                {
+                    if (dataGridView1.Rows[i].Cells[1].Value.ToString() == "승")
+                    {
+                        this.dataGridView1.Rows[i].Cells[j].Style.BackColor = Color.SkyBlue;
+                        this.dataGridView1.Rows[i].Cells[1].Style.Font = new Font("Verdana", 13, FontStyle.Bold);
+                        this.dataGridView1.Rows[i].Cells[3].Style.Font = new Font("Verdana", 9, FontStyle.Bold);
+                    }
+                    else if (dataGridView1.Rows[i].Cells[1].Value.ToString() == "패")
+                    {
+                        this.dataGridView1.Rows[i].Cells[j].Style.BackColor = Color.Pink;
+                        this.dataGridView1.Rows[i].Cells[1].Style.Font = new Font("Verdana", 13, FontStyle.Bold);
+                        this.dataGridView1.Rows[i].Cells[3].Style.Font = new Font("Verdana", 9, FontStyle.Bold);
+                    }
+                    else
+                    {
+                        this.dataGridView1.Rows[i].Cells[j].Style.BackColor = Color.SlateGray;
+                    }
+                }
+            }
             dataGridView1.EnableHeadersVisualStyles = false;
             this.dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.LightYellow;
         }
@@ -933,6 +952,9 @@ namespace LOLAPI
 
             controlMatchInfo1.dgvBlueTeam.DataSource = matchBlueTab;
             controlMatchInfo1.dgvRedTeam.DataSource = matchRedTab;
+            controlMatchInfo1.dgvBlueTeam.RowHeadersVisible = false;
+            controlMatchInfo1.dgvRedTeam.RowHeadersVisible = false;
+
 
 
             this.controlMatchInfo1.lblBlueSumDeal.Text = "총 입힌피해량 : " + blueSumDeal;

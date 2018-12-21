@@ -284,20 +284,20 @@
             // 
             // listView1
             // 
-            
+            this.listView1.BackgroundImage = global::LOLAPI.Properties.Resources.KakaoTalk_20181211_202916226;
+            this.listView1.BackgroundImageTiled = true;
             this.listView1.Location = new System.Drawing.Point(29, 270);
             this.listView1.MultiSelect = false;
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(993, 391);
             this.listView1.TabIndex = 2;
             this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.listView1_ItemCheck);
             this.listView1.ItemMouseHover += new System.Windows.Forms.ListViewItemMouseHoverEventHandler(this.listView1_ItemMouseHover);
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
             // pictureBox1
             // 
-            
+            this.pictureBox1.Image = global::LOLAPI.Properties.Resources._2;
             this.pictureBox1.Location = new System.Drawing.Point(29, 76);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(205, 190);
@@ -307,6 +307,7 @@
             // 
             // pictureBox2
             // 
+            this.pictureBox2.Image = global::LOLAPI.Properties.Resources._2;
             this.pictureBox2.Location = new System.Drawing.Point(817, 76);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(205, 190);
@@ -316,7 +317,7 @@
             // 
             // pictureBox3
             // 
-
+            this.pictureBox3.Image = global::LOLAPI.Properties.Resources.MainLogo;
             this.pictureBox3.Location = new System.Drawing.Point(245, 10);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(559, 60);

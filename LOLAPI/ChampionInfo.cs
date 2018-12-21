@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LOLAPI
 {
-    class ChampionInfo
+    public class ChampionInfo
     {
         private int attack;
 

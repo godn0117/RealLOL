@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace LOLAPI
 {
-    class Spells
+    public class Spells
     {
         private string id;
 
@@ -57,6 +58,13 @@ namespace LOLAPI
         {
             get { return full; }
             set { full = value; }
+        }
+        private Image skImage;
+
+        public Image SkImage
+        {
+            get { return skImage; }
+            set { skImage = value; }
         }
 
     }

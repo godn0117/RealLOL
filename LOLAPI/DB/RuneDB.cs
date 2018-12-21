@@ -185,8 +185,8 @@ namespace LOLAPI.DB
                     innerRune.Id = int.Parse(sdr["Id"].ToString());
                     innerRune.Key = sdr["key"].ToString();
                     innerRune.Name = sdr["name"].ToString();
-                    innerRune.ShortDesc = sdr["shortDesc"].ToString();
-                    innerRune.LongDesc = sdr["longDesc"].ToString();
+                    innerRune.ShortDesc = sdr["shortDesc"].ToString().Replace("<br>", "").Replace("</br>", "").Replace("<hr>", "").Replace("</hr>", "").Replace("<i>", "").Replace("</i>", "").Replace("<rules>", "").Replace("</rules>", "").Replace("<font color='", "").Replace("'>", "").Replace("</font>", "").Replace("<lol-uikit-tooltipped-keyword key='LinkTooltip_Description_AdaptiveDmg'>", "").Replace("<lol-uikit-tooltipped-keyword key='LinkTooltip_Description_Adaptive", "").Replace("</lol-uikit-tooltipped-keyword>", "");
+                    innerRune.LongDesc = sdr["longDesc"].ToString().Replace("<br>", "").Replace("</br>", "").Replace("<hr>", "").Replace("</hr>", "").Replace("<i>", "").Replace("</i>", "").Replace("<rules>", "").Replace("</rules>", "").Replace("<font color='", "").Replace("'>", "").Replace("</font>", "");
 
                     byte[] array = (byte[])sdr["image"];
                     MemoryStream ms = new MemoryStream(array);

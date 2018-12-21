@@ -12,6 +12,9 @@ using System.IO;
 using Newtonsoft.Json.Linq;
 using LOLAPI.DAO;
 using LOLAPI.JSON;
+using LOLAPI.Item;
+using System.Resources;
+using System.Reflection;
 
 namespace LOLAPI
 {
@@ -30,6 +33,8 @@ namespace LOLAPI
         ItemDB itemDAO = new ItemDB();
         Version version = new Version();
         JsonWork jsonWork = new JsonWork();
+
+        public Assembly Assemble { get; private set; }
 
         public controlItems()
         {
@@ -82,8 +87,43 @@ namespace LOLAPI
                 lItem.ImageKey = item.Name;
 
                 listItemList.Add(lItem);
+
+
             }
+
+            
+
+            
         }
+
+        //private void MakeListViewItem2(List<string> newList) // 리스트뷰아이템을 만들어 리스트에 아이템 등록
+        //{
+        //    ImageList imageList = new ImageList();
+
+        //    this.listView1.View = View.LargeIcon;
+
+        //    foreach (var nitem in newList)
+        //    {
+        //        foreach (LOLItem item in itemList)
+        //        {
+        //            if (nitem.Equals(item.Name))
+        //            {
+        //                imageList.Images.Add(item.Code, item.Image);
+
+        //                imageList.ImageSize = new Size(64, 64);
+        //                this.listView1.LargeImageList = imageList;
+
+
+        //                ListViewItem lItem = new ListViewItem();
+        //                lItem.Name = item.Code;
+        //                lItem.Text = item.Name;
+        //                lItem.ImageKey = item.Code;
+
+        //                listView1.Items.Add(lItem);
+        //            }                    
+        //        }
+        //    }            
+        //}
 
         private void CreateItemJsonData(string version) // Json 가져와 List에 저장하는 메서드
         {
@@ -169,19 +209,19 @@ namespace LOLAPI
                 ChangeListItemBySelectedMenu(itemList, listView1.Items, selected);
             }
 
+            //MakeListViewItem2(newList);
             foreach (var item in newList)
             {
 
                 foreach (ListViewItem listItem in listItemList)
                 {
-                    if (item.Equals(listItem.Name))
+                    if (item.Equals(listItem.Text))
                     {
                         listView1.Items.Add((ListViewItem)listItem.Clone());
-                        
+
                     }
                 }
             }
-            
         }
 
         private void CopyNameToNewList() // newList 초기화
@@ -209,7 +249,7 @@ namespace LOLAPI
                 if (isExist == false)
                 {
                     if (newList.IndexOf(item.Name) != -1)
-                    {
+                    {                        
                         newList.RemoveAt(newList.IndexOf(item.Name));
                     }
                 }
@@ -227,37 +267,60 @@ namespace LOLAPI
                     foreach (ListViewItem listItem in listItemList)
                     {
                         if (item.Equals(listItem.Name))
-                        {
+                        {                             
+                            
                             listView1.Items.Add((ListViewItem)listItem.Clone());
+                            
                         }
                     }
                 }
             }
         }
 
-        private void listView1_ItemCheck(object sender, ItemCheckEventArgs e)
-        {
-
-        }
-
         private void listView1_ItemMouseHover(object sender, ListViewItemMouseHoverEventArgs e) // 툴팁 옵션
-        {
-
+        {            
             ToolTip toolTip = new ToolTip();
             toolTip.ReshowDelay = 0;
+            
             foreach (var item in itemList)
             {
                 if (e.Item.Text.Equals(item.Name))
                 {
-                    string s = item.Name + "\r\n" + item.Plaintext + "\n" + item.Description + "\n" + item.Gold + "골드";
+                    string s = item.Name + "\r\n" + item.Plaintext + "\n" + item.Description + "\n" + "가격 : " + item.Gold + "GOLD";
                     toolTip.SetToolTip(listView1, s);
+                    break;
                 }
             }
         }
 
+
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            DetailItem detailItem = new DetailItem();
 
+            if (listView1.SelectedItems.Count > 0)   
+            {
+                if (detailItem != null)
+                {
+                    detailItem.Close();
+                }
+                LOLItem lItem = new LOLItem();
+
+                foreach (var item in itemList)
+                {
+                    if (listView1.SelectedItems[0].Text.Equals(item.Name))
+                    {
+                        lItem = item;
+
+                        detailItem = new DetailItem(lItem);
+                        detailItem.Show();
+                        detailItem.Focus();
+                        break;
+                    }
+                }
+                
+
+            }
         }
     }
 }

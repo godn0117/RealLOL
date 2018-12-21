@@ -69,7 +69,7 @@ namespace LOLAPI
                     if (item.Name.Contains(rune.Name))
                     {
                         item.Image = rune.Image;
-
+                        item.BackColor = Color.Transparent;
                     }
                 }
 
@@ -148,6 +148,7 @@ namespace LOLAPI
             panel.Visible = true;
             panel.Location = new Point(39, 160);
             panel.Size = new Size(1000, 500);
+            panel.BackColor = Color.Transparent;
 
             panel.BringToFront();
 
@@ -166,13 +167,16 @@ namespace LOLAPI
                     {
                         FlowLayoutPanel firstPanel = new FlowLayoutPanel();
                         firstPanel.Size = new Size(900, 100);
+                        firstPanel.BackColor = Color.Transparent;
                         panel.Controls.Add(firstPanel);
+
                         Button mainButton = new Button();
                         mainButton.Name = "MainButton";
-
+                        mainButton.BackColor = Color.Transparent;
                         mainButton.Size = new Size(100, 90);
+
                         firstPanel.Controls.Add(mainButton);
-                        
+
                         foreach (var innerRune in slots)
                         {
                             Button subButton = new Button();
@@ -180,32 +184,56 @@ namespace LOLAPI
                             foreach (var item in innerRuneList)
                             {
                                 if (innerRune.Contains(item.Id.ToString()))
-                                {   
+                                {
                                     subButton.Name = item.Name;
                                     subButton.Size = new Size(80, 80);
                                     subButton.BackgroundImage = item.Image;
                                     subButton.BackgroundImageLayout = ImageLayout.Stretch;
+                                    subButton.BackColor = Color.Transparent;
                                 }
                             }
                             firstPanel.Controls.Add(subButton);
                         }
+
+                        Label lblDesc = new Label();
+                        lblDesc.Size = new Size(350, 80);
+                        lblDesc.ForeColor = Color.White;
+                        lblDesc.Name = "Desc";
+                         
+                        firstPanel.Controls.Add(lblDesc);
                     }
                 }
             }
-        }       
+        }
 
         private void btnInnerRune_Click(object sender, EventArgs e)
-        {            
-            Button b = (Button)sender;             
+        {
+            Button b = (Button)sender;
             FlowLayoutPanel firstPanel = (FlowLayoutPanel)b.Parent;
 
-            foreach (Button item in firstPanel.Controls)
+
+            foreach (Button item in firstPanel.Controls.Find("MainButton", false))
             {
                 if (item.Name.Equals("MainButton"))
-                {   
+                {
                     item.BackgroundImage = b.BackgroundImage;
                     item.BackgroundImageLayout = ImageLayout.Stretch;
                     item.Refresh();
+
+                }
+            }
+
+            foreach (Label item in firstPanel.Controls.Find("Desc", false))
+            {
+                if (item.Name.Equals("Desc"))
+                {
+                    foreach (var inrune in innerRuneList)
+                    {
+                        if (inrune.Name.Equals(b.Name))
+                        {
+                            item.Text = inrune.LongDesc;
+                        }
+                    }
                 }
             }
         }

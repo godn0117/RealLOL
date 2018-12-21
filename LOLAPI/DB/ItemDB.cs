@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -68,6 +69,10 @@ namespace LOLAPI.DAO
 
                     MemoryStream ms = new MemoryStream();
                     item.Image.Save(ms, item.Image.RawFormat);
+
+                    string imgSavePath = @"C:\Users\GDC22\Desktop\RealLOL\LOLAPI" + @"\Images\" + item.Code + ".png";
+
+                    item.Image.Save(imgSavePath, ImageFormat.Png);
 
                     cmd.Parameters.AddWithValue("image", ms.ToArray());
 

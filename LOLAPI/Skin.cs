@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LOLAPI
 {
-    class Skin
+    public class Skin
     {
         private int num;
 

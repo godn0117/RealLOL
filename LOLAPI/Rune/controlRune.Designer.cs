@@ -90,20 +90,22 @@
             // 
             // btn지배
             // 
+            this.btn지배.BackColor = System.Drawing.Color.Transparent;
             this.btn지배.Location = new System.Drawing.Point(150, 17);
             this.btn지배.Name = "btn지배";
             this.btn지배.Size = new System.Drawing.Size(100, 78);
             this.btn지배.TabIndex = 3;
-            this.btn지배.UseVisualStyleBackColor = true;
+            this.btn지배.UseVisualStyleBackColor = false;
             this.btn지배.Click += new System.EventHandler(this.btn_Click);
             // 
             // btn정밀
             // 
+            this.btn정밀.BackColor = System.Drawing.Color.Transparent;
             this.btn정밀.Location = new System.Drawing.Point(29, 17);
             this.btn정밀.Name = "btn정밀";
             this.btn정밀.Size = new System.Drawing.Size(100, 78);
             this.btn정밀.TabIndex = 2;
-            this.btn정밀.UseVisualStyleBackColor = true;
+            this.btn정밀.UseVisualStyleBackColor = false;
             this.btn정밀.Click += new System.EventHandler(this.btn_Click);
             // 
             // controlRune

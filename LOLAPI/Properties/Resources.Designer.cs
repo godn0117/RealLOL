@@ -65,7 +65,7 @@ namespace LOLAPI.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap _111 {
             get {
-                object obj = ResourceManager.GetObject("111", resourceCulture);
+                object obj = ResourceManager.GetObject("_111", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -75,7 +75,7 @@ namespace LOLAPI.Properties {
         /// </summary>
         internal static System.Drawing.Bitmap _2 {
             get {
-                object obj = ResourceManager.GetObject("2", resourceCulture);
+                object obj = ResourceManager.GetObject("_2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace LOLAPI.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
-        internal static System.Drawing.Bitmap _21 {
+        internal static System.Drawing.Bitmap images {
             get {
-                object obj = ResourceManager.GetObject("21", resourceCulture);
+                object obj = ResourceManager.GetObject("images", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -96,16 +96,6 @@ namespace LOLAPI.Properties {
         internal static System.Drawing.Bitmap KakaoTalk_20181211_202916226 {
             get {
                 object obj = ResourceManager.GetObject("KakaoTalk_20181211_202916226", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
-        /// </summary>
-        internal static System.Drawing.Bitmap KakaoTalk_20181211_2029162261 {
-            get {
-                object obj = ResourceManager.GetObject("KakaoTalk_20181211_2029162261", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -136,16 +126,6 @@ namespace LOLAPI.Properties {
         internal static System.Drawing.Bitmap 돋보기 {
             get {
                 object obj = ResourceManager.GetObject("돋보기", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
-        /// </summary>
-        internal static System.Drawing.Bitmap 돋보기1 {
-            get {
-                object obj = ResourceManager.GetObject("돋보기1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
