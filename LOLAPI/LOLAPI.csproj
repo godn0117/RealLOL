@@ -231,13 +231,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>Champion.mdf</DependentUpon>
     </Content>
-    <Content Include="LOLData.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="LOLData_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>LOLData.mdf</DependentUpon>
-    </Content>
     <Content Include="Resources\111.PNG" />
     <Content Include="Resources\2.PNG" />
     <Content Include="Resources\KakaoTalk_20181211_202916226.jpg" />

@@ -59,7 +59,7 @@
             // 
             // pictureBox1
             // 
-            //this.pictureBox1.Image = global::LOLAPI.Properties.Resources._111;
+            this.pictureBox1.Image = global::LOLAPI.Properties.Resources._111;
             this.pictureBox1.Location = new System.Drawing.Point(3, 17);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(1027, 181);
