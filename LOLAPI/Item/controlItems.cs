@@ -18,7 +18,7 @@ namespace LOLAPI
     public partial class controlItems : UserControl
     {
         List<string> itemNumberList = new List<string>(); // 아이템 코드 번호 리스트
-        List<LOLItem> itemList = new List<LOLItem>(); // 아이템 객체 리스트
+        internal static List<LOLItem> itemList = new List<LOLItem>(); // 아이템 객체 리스트
 
         List<ListViewItem> listItemList = new List<ListViewItem>(); // 리스트아이템 리스트        
 

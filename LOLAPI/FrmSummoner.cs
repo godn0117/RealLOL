@@ -57,6 +57,20 @@ namespace LOLAPI
             this.Close();
         }
 
+        public Image ReturnItemImage(int i)
+        {
+            Image itemImage = Image.FromFile(@"C:\Users\GDC22\Desktop\RealLOL\LOLAPI\Resources\images.jpg");
+            foreach (LOLItem item in controlItems.itemList)
+            {
+                if (item.Code.Equals(i.ToString()))
+                {
+                    itemImage = item.Image;
+                }
+            }
+            //itemImage.Size = new Size(16, 16);
+            return itemImage;
+        }
+
         private void FrmSummoner_Load(object sender, EventArgs e)
         {
             ParsingSummonerCode();
@@ -86,6 +100,7 @@ namespace LOLAPI
                     this.txtTeamLeagueName.Text = lstRank[i].LeagueName;
                 }
             }
+
             resultTab = new DataTable();
             resultTab.Columns.Add("플레이");
             resultTab.Columns.Add("승/패");
@@ -93,7 +108,7 @@ namespace LOLAPI
             resultTab.Columns.Add("챔피언");
             resultTab.Columns.Add("K / D / A");
             resultTab.Columns.Add("스펠");
-            resultTab.Columns.Add("아이템");
+            resultTab.Columns.Add("아이템", typeof(ListView));
             resultTab.Columns.Add("골드수급");
             resultTab.Columns.Add("딜량");
             resultTab.Columns.Add("피해량");
@@ -118,10 +133,76 @@ namespace LOLAPI
                     row["챔피언"] = lstPlayer[i].ChampionId;
                     row["K / D / A"] = lstPlayer[i].Kills + " / " + lstPlayer[i].Deaths + " / " + lstPlayer[i].Assists;
                     row["스펠"] = lstPlayer[i].Spell1Id + " / " + lstPlayer[i].Spell2Id;
-                    row["아이템"] = lstPlayer[i].Item0 + " / " + lstPlayer[i].Item1 + " / " + lstPlayer[i].Item2 + " / " + lstPlayer[i].Item3 + " / " + lstPlayer[i].Item4 + " / " + lstPlayer[i].Item5 + " / " + lstPlayer[i].Item6;
+
+                    //for (int j = 0; j < dataGridViewImageColumns.Length; j++)
+                    //{
+                    //    var imgCol = new DataGridViewImageColumn();
+                    //    imgCol.Image = ReturnItemImage(lstPlayer[i].Item0);
+                    //}
+
+                    ImageList itemImageList = new ImageList();
+                    itemImageList.ImageSize = new Size(16, 16);
+                    itemImageList.Images.Add(lstPlayer[i].Item0.ToString(), ReturnItemImage(lstPlayer[i].Item0));
+                    itemImageList.Images.Add(lstPlayer[i].Item1.ToString(), ReturnItemImage(lstPlayer[i].Item1));
+                    itemImageList.Images.Add(lstPlayer[i].Item2.ToString(), ReturnItemImage(lstPlayer[i].Item2));
+                    itemImageList.Images.Add(lstPlayer[i].Item3.ToString(), ReturnItemImage(lstPlayer[i].Item3));
+                    itemImageList.Images.Add(lstPlayer[i].Item4.ToString(), ReturnItemImage(lstPlayer[i].Item4));
+                    itemImageList.Images.Add(lstPlayer[i].Item5.ToString(), ReturnItemImage(lstPlayer[i].Item5));
+
+                    
+                    ListView listView = new ListView();
+                    listView.View = View.LargeIcon;
+                    listView.LargeImageList = itemImageList;
+                    listView.SmallImageList = itemImageList;
+
+                    ListViewItem lItem0 = new ListViewItem();
+                    lItem0.Name = lstPlayer[i].Item0.ToString();
+                    lItem0.Text = lstPlayer[i].Item0.ToString();
+                    lItem0.ImageKey = lstPlayer[i].Item0.ToString();
+
+                    ListViewItem lItem1 = new ListViewItem();
+                    lItem1.Name = lstPlayer[i].Item1.ToString();
+                    lItem1.Text = lstPlayer[i].Item1.ToString();
+                    lItem1.ImageKey = lstPlayer[i].Item1.ToString();
+
+                    ListViewItem lItem2 = new ListViewItem();
+                    lItem2.Name = lstPlayer[i].Item2.ToString();
+                    lItem2.Text = lstPlayer[i].Item2.ToString();
+                    lItem2.ImageKey = lstPlayer[i].Item2.ToString();
+
+                    ListViewItem lItem3 = new ListViewItem();
+                    lItem3.Name = lstPlayer[i].Item3.ToString();
+                    lItem3.Text = lstPlayer[i].Item3.ToString();
+                    lItem3.ImageKey = lstPlayer[i].Item3.ToString();
+
+                    ListViewItem lItem4 = new ListViewItem();
+                    lItem4.Name = lstPlayer[i].Item4.ToString();
+                    lItem4.Text = lstPlayer[i].Item4.ToString();
+                    lItem4.ImageKey = lstPlayer[i].Item4.ToString();
+
+                    ListViewItem lItem5 = new ListViewItem();
+                    lItem5.Name = lstPlayer[i].Item5.ToString();
+                    lItem5.Text = lstPlayer[i].Item5.ToString();
+                    lItem5.ImageKey = lstPlayer[i].Item5.ToString();
+
+                    listView.Items.Add(lItem0);
+                    listView.Items.Add(lItem1);
+                    listView.Items.Add(lItem2);
+                    listView.Items.Add(lItem3);
+                    listView.Items.Add(lItem4);
+                    listView.Items.Add(lItem5);
+
+                    row["아이템"] = listView;// ReturnItemImage(lstPlayer[i].Item1) ReturnItemImage(lstPlayer[i].Item2) ReturnItemImage(lstPlayer[i].Item3)  ReturnItemImage(lstPlayer[i].Item4) ReturnItemImage(lstPlayer[i].Item5)  ReturnItemImage(lstPlayer[i].Item6);
+
                     row["골드수급"] = lstPlayer[i].GoldEarned + " Gold";
                     row["딜량"] = lstPlayer[i].TotalDamageDealtToChampions;
                     row["피해량"] = lstPlayer[i].TotalDamageTaken;
+
+
+                    
+
+
+
 
                     resultTab.Rows.Add(row);
 
@@ -152,9 +233,18 @@ namespace LOLAPI
                 {
                     resultTab.Rows[i]["타입"] = "솔로 랭크";
                 }
-                else if (lstMatches[i].Queue == 840 || lstMatches[i].Queue == 850)
+                else if (lstMatches[i].Queue == 850)
                 {
-                    resultTab.Rows[i]["타입"] = "봇 전";
+                    resultTab.Rows[i]["타입"] = "중급 봇";
+                }
+                else if (lstMatches[i].Queue == 840)
+                {
+                    resultTab.Rows[i]["타입"] = "하급 봇";
+
+                }
+                else if (lstMatches[i].Queue == 830)
+                {
+                    resultTab.Rows[i]["타입"] = "입문 봇";
                 }
                 else
                 {
@@ -174,28 +264,28 @@ namespace LOLAPI
                 MessageBox.Show("공백 및 대소문자를 구별해주세요");
                 return;
             }
-            for (int i = 0; i <= playTimeIndex; i++)
-            {
-                for (int j = 0; j < resultTab.Columns.Count; j++)
-                {
-                    if (dataGridView1.Rows[i].Cells[1].Value.ToString() == "승")
-                    {
-                        this.dataGridView1.Rows[i].Cells[j].Style.BackColor = Color.SkyBlue;
-                        this.dataGridView1.Rows[i].Cells[1].Style.Font = new Font("Verdana", 13, FontStyle.Bold);
-                        this.dataGridView1.Rows[i].Cells[3].Style.Font = new Font("Verdana", 9, FontStyle.Bold);
-                    }
-                    else if (dataGridView1.Rows[i].Cells[1].Value.ToString() == "패")
-                    {
-                        this.dataGridView1.Rows[i].Cells[j].Style.BackColor = Color.Pink;
-                        this.dataGridView1.Rows[i].Cells[1].Style.Font = new Font("Verdana", 13, FontStyle.Bold);
-                        this.dataGridView1.Rows[i].Cells[3].Style.Font = new Font("Verdana", 9, FontStyle.Bold);
-                    }
-                    else
-                    {
-                        this.dataGridView1.Rows[i].Cells[j].Style.BackColor = Color.SlateGray;
-                    }
-                }
-            }
+            //for (int i = 0; i <= playTimeIndex; i++)
+            //{
+            //    for (int j = 0; j < resultTab.Columns.Count; j++)
+            //    {
+            //        if (dataGridView1.Rows[i].Cells[1].Value.ToString() == "승")
+            //        {
+            //            this.dataGridView1.Rows[i].Cells[j].Style.BackColor = Color.SkyBlue;
+            //            this.dataGridView1.Rows[i].Cells[1].Style.Font = new Font("Verdana", 13, FontStyle.Bold);
+            //            this.dataGridView1.Rows[i].Cells[3].Style.Font = new Font("Verdana", 9, FontStyle.Bold);
+            //        }
+            //        else if (dataGridView1.Rows[i].Cells[1].Value.ToString() == "패")
+            //        {
+            //            this.dataGridView1.Rows[i].Cells[j].Style.BackColor = Color.Pink;
+            //            this.dataGridView1.Rows[i].Cells[1].Style.Font = new Font("Verdana", 13, FontStyle.Bold);
+            //            this.dataGridView1.Rows[i].Cells[3].Style.Font = new Font("Verdana", 9, FontStyle.Bold);
+            //        }
+            //        else
+            //        {
+            //            this.dataGridView1.Rows[i].Cells[j].Style.BackColor = Color.SlateGray;
+            //        }
+            //    }
+            //}
             dataGridView1.EnableHeadersVisualStyles = false;
             this.dataGridView1.ColumnHeadersDefaultCellStyle.BackColor = Color.LightYellow;
         }
@@ -322,7 +412,15 @@ namespace LOLAPI
                     platformId = item["player"]["platformId"].ToString();
                     currentAccountId = item["player"]["currentAccountId"].ToString();
                     profileIcon = Int32.Parse(item["player"]["profileIcon"].ToString());
-                    summonerId = item["player"]["summonerId"].ToString();
+                    try
+                    {
+                        summonerId = item["player"]["summonerId"].ToString();
+
+                    }
+                    catch (NullReferenceException)
+                    {
+                        summonerId = "";
+                    }
                     accountId = item["player"]["accountId"].ToString();
                     participantId = Int32.Parse(item["participantId"].ToString());
 

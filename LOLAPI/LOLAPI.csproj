@@ -206,7 +206,9 @@
     <EmbeddedResource Include="Spell\controlSpell.resx">
       <DependentUpon>controlSpell.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="JSON\Champions.json" />
     <None Include="JSON\items.json" />
     <None Include="JSON\Runes.json" />
@@ -224,13 +226,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Champion.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Champion_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>Champion.mdf</DependentUpon>
-    </Content>
     <Content Include="LOLData.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -240,6 +235,7 @@
     </Content>
     <Content Include="Resources\111.PNG" />
     <Content Include="Resources\2.PNG" />
+    <Content Include="Resources\images.jpg" />
     <Content Include="Resources\KakaoTalk_20181211_202916226.jpg" />
     <Content Include="Resources\MainLogo.PNG" />
     <Content Include="Resources\결의.jpg" />
